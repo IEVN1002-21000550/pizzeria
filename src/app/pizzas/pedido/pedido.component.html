@@ -1,0 +1,83 @@
+<div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <!-- Formulario de Pedido -->
+    <form [formGroup]="pedidoForm" (ngSubmit)="enviar()" class="mx-auto">
+      <div class="grid gap-6 sm:grid-cols-3">
+        
+        <!-- Nombre -->
+        <div class="mb-5" *ngIf="!servicio.clienteOcultado()">
+          <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
+          <input formControlName="nombre" type="text" placeholder="Ingrese su nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        </div>
+  
+        <!-- Dirección -->
+        <div class="mb-5" *ngIf="!servicio.clienteOcultado()">
+          <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección:</label>
+          <input formControlName="direccion" type="text" placeholder="Ingrese su dirección" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        </div>
+  
+        <!-- Teléfono -->
+        <div class="mb-5" *ngIf="!servicio.clienteOcultado()">
+          <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono:</label>
+          <input formControlName="telefono" type="text" pattern="[4-7]{3}-[0-9]{3}-[0-9]{4}" placeholder="477-111-1111" class="block py-2.5 ps-6 pe-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
+        </div>
+  
+        <!-- Tamaño Pizza -->
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-gray-900 dark:text-gray-300">Tamaño:</label>
+          <div>
+            <input type="radio" formControlName="tamanio" value="40" id="option-1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+            <label for="option-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Chica $40</label>
+          </div>
+          <div>
+            <input type="radio" formControlName="tamanio" value="80" id="option-2" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+            <label for="option-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mediana $80</label>
+          </div>
+          <div>
+            <input type="radio" formControlName="tamanio" value="120" id="option-3" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+            <label for="option-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Grande $120</label>
+          </div>
+        </div>
+  
+        <!-- Ingredientes -->
+        <div class="mb-5">
+            <label class="block text-sm font-medium text-gray-900 dark:text-gray-300">Ingredientes:</label>
+            <div formGroupName="ingredientes">
+              <div class="flex items-center mb-4">
+                <input type="checkbox" formControlName="jamon" id="checkbox-1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="checkbox-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jamón $10</label>
+              </div>
+              <div class="flex items-center mb-4">
+                <input type="checkbox" formControlName="pina" id="checkbox-2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="checkbox-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Piña $10</label>
+              </div>
+              <div class="flex items-center mb-4">
+                <input type="checkbox" formControlName="champinones" id="checkbox-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="checkbox-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Champiñones $10</label>
+              </div>
+            </div>
+          </div>
+          
+  
+        <!-- Número de Pizzas -->
+        <div class="mb-5">
+          <label for="cantidad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Num. de Pizzas:</label>
+          <input formControlName="cantidad" type="number" placeholder="Ingrese la cantidad de pizzas solicitadas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        </div>
+  
+        <!-- Fecha -->
+        <div class="mb-5" *ngIf="!servicio.clienteOcultado()">
+          <label for="fecha" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha:</label>
+          <input formControlName="fecha" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        </div>
+  
+        <!-- Botón de Enviar -->
+        <div class="mb-5 sm:col-span-3">
+          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Agregar
+        </button>
+        </div>
+      </div>
+     
+    </form>
+  </div>
+  
